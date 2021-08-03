@@ -1,4 +1,6 @@
+//npx json-server --port 3001 --watch db.json
 import { useState } from "react";
+import axios from "axios";
 
 const PersonForm = ({persons, setPersons}) => {
 	const [newName, setNewName] = useState("");
@@ -8,7 +10,7 @@ const PersonForm = ({persons, setPersons}) => {
 		event.preventDefault();
 		let alreadyExist = false;
 		let temp = [...persons];
-		temp.forEach(function(name, index, array){
+		persons.forEach(function(name, index, array){
 			if (name.name === newName){
 				alert(`${newName} is already added to phonebook`);
 				alreadyExist = true;
@@ -17,10 +19,17 @@ const PersonForm = ({persons, setPersons}) => {
 
 		if (alreadyExist === false){
 			temp.push({name: newName, number: number});
-			setPersons(temp);
+			axios
+			.post('http://localhost:3001/persons', {name: newName, number: number})
+			.then(response => {
+				setPersons(persons.concat(response.data))
+			})
 		}
+
+
 		setNewName("");
 		setNumber("");
+		
 	}
 
 	return (
