@@ -1,8 +1,12 @@
+import personService from "./services/persons"
+const Numbers = ({persons, setPersons, filter, filteredList}) => {
 
-const Numbers = ({persons, filter, filteredList}) => {
-
-	const handleDelete = (key) => {
-		console.log(key)
+	const handleDelete = (id) => {
+		personService
+		.deleteEntry(id)
+		.then(response => {
+			setPersons(response.data)
+		})
 	}
 
 	const displayContacts = () => {

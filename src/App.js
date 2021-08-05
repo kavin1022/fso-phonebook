@@ -15,7 +15,7 @@ const App = () => {
 		.then(response => {
 		  setPersons(response.data)
 		})
-	}, [])
+	}, [persons])
 
 	return (
 		<div>
@@ -27,7 +27,7 @@ const App = () => {
 			<PersonForm persons = {persons} setPersons ={setPersons}/>
 
 			<h2>Numbers</h2>
-			<Numbers persons = {persons} filter = {filter} filteredList = {filteredList}/>
+			<Numbers persons = {persons} setPersons ={setPersons} filter = {filter} filteredList = {filteredList}/>
 		</div>
 	)
 }

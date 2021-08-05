@@ -20,7 +20,6 @@ const PersonForm = ({persons, setPersons}) => {
 		event.preventDefault();
 		let alreadyExist = searchIfExist();
 
-		console.log(alreadyExist);
 		if (alreadyExist === false){
 			personService
 			.create({name: newName, number: number})
